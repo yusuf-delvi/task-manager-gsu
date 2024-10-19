@@ -5,11 +5,13 @@ import logout from './access/logout';
 import token from './access/token';
 import task from './task';
 import profile from './profile';
+import authentication from '../auth/authentication';
 
 const router = express.Router();
 
 router.use('/signup', signup);
 router.use('/login', login);
+router.use(authentication);
 router.use('/logout', logout);
 router.use('/token', token);
 router.use('/profile', profile);
