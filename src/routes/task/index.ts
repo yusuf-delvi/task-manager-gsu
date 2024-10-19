@@ -8,18 +8,19 @@ import Task from '../../database/Task/model';
 import TaskRepo from '../../database/Task/repo';
 import { BadRequestError } from '../../core/ApiError';
 import { ProtectedRequest } from 'app-request';
+import Joi from 'joi';
 
 const router = express.Router();
 
 router.get(
 	'/',
-	validator(schema.pagination, ValidationSource.QUERY),
-	asyncHandler(async (req, res) => {
-		// const blogs = await TaskRepo.findLatestBlogs(
-		// 	parseInt(req.query.pageNumber as string),
-		// 	parseInt(req.query.pageItemCount as string),
-		// );
-		return new SuccessResponse('success', {}).send(res);
+	validator(Joi.object({}), ValidationSource.QUERY),
+	asyncHandler(async (req: ProtectedRequest, res) => {
+		const foundTasks = await TaskRepo.findAllForAuthor(req.user);
+
+		if (!foundTasks) throw new BadRequestError('something went wrong');
+
+		return new SuccessResponse('success', foundTasks).send(res);
 	}),
 );
 
@@ -27,7 +28,7 @@ router.post(
 	'/',
 	validator(schema.create, ValidationSource.BODY),
 	asyncHandler(async (req: ProtectedRequest, res) => {
-		const createdTask = await TaskRepo.update({
+		const createdTask = await TaskRepo.create({
 			...req.body,
 			createdBy: req.user._id,
 		});
@@ -76,7 +77,7 @@ router.put(
 
 		const updatedTask = await TaskRepo.update({
 			_id: taskId,
-			isCompleted: !foundTask.isCompleted,
+			status: req.body.status,
 		} as Task);
 
 		if (!updatedTask) throw new BadRequestError('Unable to update');

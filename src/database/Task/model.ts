@@ -4,11 +4,26 @@ import User from '../User/model';
 export const DOCUMENT_NAME = 'Task';
 export const COLLECTION_NAME = 'tasks';
 
+export enum TaskStatus {
+	PENDING = 'PENDING',
+	INPROGRESS = 'INPROGRESS',
+	DONE = 'DONE',
+}
+
+export enum TaskPriority {
+	LOW = 'LOW',
+	MEDIUM = 'MEDIUM',
+	HIGH = 'HIGH',
+}
+
 export default interface Task {
 	_id: Types.ObjectId;
 	title: string;
+	description?: string;
+	priority: TaskPriority;
+	status: TaskStatus;
+	dueDate: Date;
 	createdBy: User;
-	isCompleted: boolean;
 	createdAt?: Date;
 	updatedAt?: Date;
 }
@@ -21,15 +36,31 @@ const schema = new Schema<Task>(
 			maxlength: 500,
 			trim: true,
 		},
+		description: {
+			type: Schema.Types.String,
+			default: '',
+		},
+		priority: {
+			type: Schema.Types.String,
+			required: true,
+			default: TaskPriority.LOW,
+			enum: Object.values(TaskPriority),
+		},
+		status: {
+			type: Schema.Types.String,
+			default: TaskStatus.PENDING,
+			required: true,
+			enum: Object.values(TaskStatus),
+		},
+		dueDate: {
+			type: Schema.Types.Date,
+			required: true,
+		},
 		createdBy: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
 			required: true,
 			index: true,
-		},
-		isCompleted: {
-			type: Schema.Types.Boolean,
-			default: false,
 		},
 		createdAt: {
 			type: Date,
