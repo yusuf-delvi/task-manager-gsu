@@ -27,6 +27,7 @@ export default {
 		id: JoiObjectId().required(),
 	}),
 	updateStatus: Joi.object().keys({
+		id: JoiObjectId().required(),
 		status: Joi.string()
 			.valid(...Object.values(TaskStatus))
 			.required(),
