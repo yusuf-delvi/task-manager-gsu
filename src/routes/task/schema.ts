@@ -15,6 +15,7 @@ export default {
 		dueDate: Joi.date().required(),
 	}),
 	update: Joi.object().keys({
+		_id: JoiObjectId().required(),
 		title: Joi.string().required(),
 		description: Joi.string().default(''),
 		priority: Joi.string()
