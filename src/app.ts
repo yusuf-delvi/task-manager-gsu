@@ -1,4 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
+import swagger from 'swagger-ui-express';
+import fs from 'fs';
 import Logger from './core/Logger';
 import cors from 'cors';
 import { corsUrl, environment } from './config';
@@ -16,6 +18,10 @@ process.on('uncaughtException', (e) => {
 });
 
 const app = express();
+
+const swaggerDocument = JSON.parse(fs.readFileSync('./swagger.json', 'utf8'));
+
+app.use('/docs', swagger.serve, swagger.setup(swaggerDocument));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(

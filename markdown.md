@@ -68,7 +68,7 @@ To run the application locally, follow the steps below:
 You can find detailed API documentation in the Swagger Docs. Once the application is running, access the Swagger documentation at:
 
 ```
-http://localhost:4000/swaggerdocs
+http://localhost:4000/docs
 ```
 
 Now you're ready to start working on the Task Manager application locally!

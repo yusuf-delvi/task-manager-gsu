@@ -1,0 +1,159 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Task Management",
+		"version": "1.0.0",
+		"description": "This is the API documentation for my Task Management application."
+	},
+	"servers": [
+		{
+			"url": "http://localhost:4000",
+			"description": "Local server"
+		}
+	],
+	"paths": {
+		"/login": {
+			"post": {
+				"summary": "Login user",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Get the user detail, tokens"
+					}
+				}
+			}
+		},
+		"/signup": {
+			"post": {
+				"summary": "Signup user",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string"
+									},
+									"email": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Get the user detail, tokens"
+					}
+				}
+			}
+		},
+		"/task": {
+			"get": {
+				"summary": "Get all tasks",
+				"responses": {
+					"200": {
+						"description": "A list of tasks"
+					}
+				}
+			},
+			"post": {
+				"summary": "Create task",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"title": { "type": "string" },
+									"description": { "type": "string" },
+									"priority": { "type": "string" },
+									"status": { "type": "string" },
+									"dueDate": { "type": "string" }
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "task created Successfully"
+					}
+				}
+			},
+			"put": {
+				"summary": "Update task",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"title": { "type": "string" },
+									"description": { "type": "string" },
+									"priority": { "type": "string" },
+									"status": { "type": "string" },
+									"dueDate": { "type": "string" }
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "task updated Successfully"
+					}
+				}
+			}
+		},
+		"/task/updateStatus": {
+			"put": {
+				"summary": "Create task",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": { "type": "string" },
+									"status": { "type": "string" }
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "task created Successfully"
+					}
+				}
+			}
+		}
+	}
+}
