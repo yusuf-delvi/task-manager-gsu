@@ -71,7 +71,4 @@ You can find detailed API documentation in the Swagger Docs. Once the applicatio
 http://localhost:4000/swaggerdocs
 ```
 
----
-
 Now you're ready to start working on the Task Manager application locally!
-```
