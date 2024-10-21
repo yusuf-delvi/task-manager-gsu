@@ -72,3 +72,5 @@ http://localhost:4000/swaggerdocs
 ```
 
 Now you're ready to start working on the Task Manager application locally!
+
+-- For any issues contact yusufmddelvi8@gmail.com
