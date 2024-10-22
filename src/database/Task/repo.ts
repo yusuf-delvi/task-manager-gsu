@@ -8,8 +8,8 @@ async function create(task: Task): Promise<Task> {
 	const now = new Date();
 	task.createdAt = now;
 	task.updatedAt = now;
-	const createdBlog = await TaskModel.create(task);
-	return createdBlog.toObject();
+	const createdTask = await TaskModel.create(task);
+	return createdTask.toObject();
 }
 
 async function findById(id: Types.ObjectId): Promise<Task | null> {
